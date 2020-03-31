@@ -27,6 +27,9 @@ export default class PathfindingVisualizer extends Component {
   }
 
   resetGrid() {
+    if (Math.floor((window.innerWidth * 0.25) / 25) !== START_NODE_COL) {
+      window.location.reload();
+    }
     const grid = getInitialGrid();
     const visitedNodes = document.getElementsByClassName('node-visited');
     while (visitedNodes.length > 0) {
