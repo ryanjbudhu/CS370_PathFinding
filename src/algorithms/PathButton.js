@@ -39,7 +39,6 @@ export default class DijkstraButton extends Component {
       default:
         return;
     }
-    // const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     this.props.animate(visitedNodesInOrder, nodesInShortestPathOrder);
   }
 
