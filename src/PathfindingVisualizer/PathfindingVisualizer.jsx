@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Node from './Node/Node';
-import DijkstraButton from '../algorithms/Dijkstra/DijkstraButton';
+// import DijkstraButton from '../algorithms/Dijkstra/DijkstraButton';
+// import AStarButton from '../algorithms/AStar/AstarButton';
+import PathButton from '../algorithms/PathButton';
 
 import './PathfindingVisualizer.css';
 
@@ -8,6 +10,8 @@ const START_NODE_ROW = Math.floor((window.innerHeight * 0.35) / 25);
 const START_NODE_COL = Math.floor((window.innerWidth * 0.25) / 25);
 const FINISH_NODE_ROW = Math.floor((window.innerHeight * 0.35) / 25);
 const FINISH_NODE_COL = Math.floor((window.innerWidth * 0.75) / 25);
+
+const algorithms = ['A*', 'Dijkstra'];
 
 export default class PathfindingVisualizer extends Component {
   constructor() {
@@ -84,15 +88,34 @@ export default class PathfindingVisualizer extends Component {
     return (
       <>
         {grid ? (
-          <DijkstraButton
-            grid={grid}
-            animate={this.animate}
-            animateShortestPath={this.animateShortestPath}
-          />
+          <div className="buttonList">
+            {algorithms.map((alg, i) => (
+              <PathButton
+                key={i}
+                alg={alg}
+                grid={grid}
+                animate={this.animate}
+                animateShortestPath={this.animateShortestPath}
+              />
+            ))}
+            {/* <DijkstraButton
+              grid={grid}
+              animate={this.animate}
+              animateShortestPath={this.animateShortestPath}
+            />
+            <AStarButton
+              grid={grid}
+              animate={this.animate}
+              animateShortestPath={this.animateShortestPath}
+            /> */}
+          </div>
         ) : (
           <h1>Wait</h1>
         )}
-        <button onClick={() => this.resetGrid()}>Reset</button>
+        <br />
+        <button className="resetButton" onClick={() => this.resetGrid()}>
+          Reset
+        </button>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
