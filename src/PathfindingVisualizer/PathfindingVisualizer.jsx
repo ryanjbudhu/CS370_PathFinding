@@ -8,7 +8,6 @@ const START_NODE_ROW = Math.floor((window.innerHeight * 0.35) / 25);
 const START_NODE_COL = Math.floor((window.innerWidth * 0.25) / 25);
 const FINISH_NODE_ROW = Math.floor((window.innerHeight * 0.35) / 25);
 const FINISH_NODE_COL = Math.floor((window.innerWidth * 0.75) / 25);
-console.log(START_NODE_COL, START_NODE_ROW, FINISH_NODE_COL, FINISH_NODE_ROW);
 
 export default class PathfindingVisualizer extends Component {
   constructor() {
@@ -21,6 +20,19 @@ export default class PathfindingVisualizer extends Component {
 
   componentDidMount() {
     const grid = getInitialGrid();
+    this.setState({grid});
+  }
+
+  resetGrid() {
+    const grid = getInitialGrid();
+    const visitedNodes = document.getElementsByClassName('node-visited');
+    while (visitedNodes.length > 0) {
+      visitedNodes[0].classList.remove('node-visited');
+    }
+    const pathNodes = document.getElementsByClassName('node-shortest-path');
+    while (pathNodes.length > 0) {
+      pathNodes[0].classList.remove('node-shortest-path');
+    }
     this.setState({grid});
   }
 
@@ -49,8 +61,9 @@ export default class PathfindingVisualizer extends Component {
       }
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          'node node-visited';
+        document
+          .getElementById(`node-${node.row}-${node.col}`)
+          .classList.add('node-visited');
       }, 10 * i);
     }
   }
@@ -59,8 +72,9 @@ export default class PathfindingVisualizer extends Component {
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
       setTimeout(() => {
         const node = nodesInShortestPathOrder[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          'node node-shortest-path';
+        document
+          .getElementById(`node-${node.row}-${node.col}`)
+          .classList.replace('node-visited', 'node-shortest-path');
       }, 50 * i);
     }
   }
@@ -78,7 +92,7 @@ export default class PathfindingVisualizer extends Component {
         ) : (
           <h1>Wait</h1>
         )}
-
+        <button onClick={() => this.resetGrid()}>Reset</button>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
