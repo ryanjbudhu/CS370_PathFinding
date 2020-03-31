@@ -13,7 +13,7 @@ export default class DijkstraButton extends Component {
 
     this.state = {};
   }
-
+  // ADD ALGORITHM NAME IN SWITCH
   visualize() {
     const grid = this.props.grid;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];

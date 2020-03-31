@@ -9,6 +9,7 @@ const START_NODE_COL = Math.floor((window.innerWidth * 0.25) / 25);
 const FINISH_NODE_ROW = Math.floor((window.innerHeight * 0.35) / 25);
 const FINISH_NODE_COL = Math.floor((window.innerWidth * 0.75) / 25);
 
+// ADD ALGORITHM NAMES HERE
 const algorithms = ['A*', 'Dijkstra'];
 
 export default class PathfindingVisualizer extends Component {
