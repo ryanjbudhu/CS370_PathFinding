@@ -96,16 +96,6 @@ export default class PathfindingVisualizer extends Component {
                 animateShortestPath={this.animateShortestPath}
               />
             ))}
-            {/* <DijkstraButton
-              grid={grid}
-              animate={this.animate}
-              animateShortestPath={this.animateShortestPath}
-            />
-            <AStarButton
-              grid={grid}
-              animate={this.animate}
-              animateShortestPath={this.animateShortestPath}
-            /> */}
           </div>
         ) : (
           <h1>Wait</h1>
