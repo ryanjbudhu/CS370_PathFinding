@@ -93,6 +93,10 @@ export default class PathfindingVisualizer extends Component {
                 key={i}
                 alg={alg}
                 grid={grid}
+                START_NODE_ROW={START_NODE_ROW}
+                START_NODE_COL={START_NODE_COL}
+                FINISH_NODE_ROW={FINISH_NODE_ROW}
+                FINISH_NODE_COL={FINISH_NODE_COL}
                 animate={this.animate}
                 animateShortestPath={this.animateShortestPath}
               />
