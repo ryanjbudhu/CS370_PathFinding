@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import Node from './Node/Node';
-// import DijkstraButton from '../algorithms/Dijkstra/DijkstraButton';
-// import AStarButton from '../algorithms/AStar/AstarButton';
 import PathButton from '../algorithms/PathButton';
 
 import './PathfindingVisualizer.css';
