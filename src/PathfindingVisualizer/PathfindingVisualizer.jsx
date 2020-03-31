@@ -31,6 +31,11 @@ export default class PathfindingVisualizer extends Component {
       window.location.reload();
     }
     const grid = getInitialGrid();
+    this.resetColors();
+    this.setState({grid});
+  }
+
+  resetColors() {
     const visitedNodes = document.getElementsByClassName('node-visited');
     while (visitedNodes.length > 0) {
       visitedNodes[0].classList.remove('node-visited');
@@ -39,7 +44,6 @@ export default class PathfindingVisualizer extends Component {
     while (pathNodes.length > 0) {
       pathNodes[0].classList.remove('node-shortest-path');
     }
-    this.setState({grid});
   }
 
   handleMouseDown(row, col) {
@@ -62,7 +66,7 @@ export default class PathfindingVisualizer extends Component {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
           this.animateShortestPath(nodesInShortestPathOrder);
-        }, 10 * i);
+        }, 20 * i);
         return;
       }
       setTimeout(() => {
@@ -70,7 +74,7 @@ export default class PathfindingVisualizer extends Component {
         document
           .getElementById(`node-${node.row}-${node.col}`)
           .classList.add('node-visited');
-      }, 10 * i);
+      }, 20 * i);
     }
   }
 
@@ -110,7 +114,10 @@ export default class PathfindingVisualizer extends Component {
         )}
         <br />
         <button className="resetButton" onClick={() => this.resetGrid()}>
-          Reset
+          Reset Grid
+        </button>
+        <button className="resetButton" onClick={() => this.resetColors()}>
+          Reset Colors
         </button>
         <div className="grid">
           {grid.map((row, rowIdx) => {
