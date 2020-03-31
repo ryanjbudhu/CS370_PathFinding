@@ -113,10 +113,12 @@ export default class PathfindingVisualizer extends Component {
 }
 
 const getInitialGrid = () => {
+  const numWide = Math.floor(window.innerWidth / 25);
+  const numHigh = Math.floor(window.innerHeight / 25);
   const grid = [];
-  for (let row = 0; row < 20; row++) {
+  for (let row = 0; row < numHigh; row++) {
     const currentRow = [];
-    for (let col = 0; col < 50; col++) {
+    for (let col = 0; col < numWide; col++) {
       currentRow.push(createNode(col, row));
     }
     grid.push(currentRow);
