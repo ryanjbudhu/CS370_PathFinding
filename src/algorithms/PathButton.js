@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import {
-  dijkstra,
-  getNodesInShortestPathOrder_dijkstra,
-} from './Dijkstra/dijkstra';
-import {astar, getNodesInShortestPathOrder_astar} from './AStar/astar';
+import {dijkstra, getNodesInShortestPathOrder_dijkstra} from './Dijkstra';
+import {astar, getNodesInShortestPathOrder_astar} from './AStar';
 
 const START_NODE_ROW = Math.floor((window.innerHeight * 0.35) / 25);
 const START_NODE_COL = Math.floor((window.innerWidth * 0.25) / 25);
