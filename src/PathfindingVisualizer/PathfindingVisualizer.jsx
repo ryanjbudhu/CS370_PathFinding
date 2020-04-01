@@ -68,7 +68,7 @@ export default class PathfindingVisualizer extends Component {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
           this.animateShortestPath(nodesInShortestPathOrder);
-        }, 25 * i);
+        }, 15 * i);
         return;
       }
       setTimeout(() => {
@@ -76,7 +76,7 @@ export default class PathfindingVisualizer extends Component {
         document
           .getElementById(`node-${node.row}-${node.col}`)
           .classList.add('node-visited');
-      }, 25 * i);
+      }, 15 * i);
     }
   }
 
@@ -87,7 +87,7 @@ export default class PathfindingVisualizer extends Component {
         document
           .getElementById(`node-${node.row}-${node.col}`)
           .classList.replace('node-visited', 'node-shortest-path');
-      }, 15 * i);
+      }, 30 * i);
     }
   }
 
