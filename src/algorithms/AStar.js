@@ -43,7 +43,6 @@ function updateUnvisitedNeighbors(
         Math.abs(neighbor.row - finishNode.row);
       neighbor.previousNode = node;
       if (!visitedNodesInOrder.includes(neighbor)) {
-        console.log('NEIGHBOR', neighbor);
         open.push(neighbor);
       }
     }
