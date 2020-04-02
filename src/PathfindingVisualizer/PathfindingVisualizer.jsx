@@ -165,12 +165,12 @@ export default class PathfindingVisualizer extends Component {
     if (nodesInShortestPathOrder.length === 1) {
       // No path if this is reached
       for (let i = 0; i < visitedNodesInOrder.length; i++) {
-        setTimeout(() => {
-          const node = visitedNodesInOrder[i];
-          document
-            .getElementById(`node-${node.row}-${node.col}`)
-            .classList.replace('node-visited', 'node-failed');
-        }, 30 * i);
+        // setTimeout(() => {
+        const node = visitedNodesInOrder[i];
+        document
+          .getElementById(`node-${node.row}-${node.col}`)
+          .classList.replace('node-visited', 'node-failed');
+        // }, 30 * i);
       }
     }
   }
