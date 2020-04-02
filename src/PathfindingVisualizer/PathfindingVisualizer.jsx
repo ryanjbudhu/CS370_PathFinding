@@ -9,6 +9,11 @@ const START_NODE_COL = Math.floor((window.innerWidth * 0.25) / 25);
 const FINISH_NODE_ROW = Math.floor((window.innerHeight * 0.35) / 25);
 const FINISH_NODE_COL = Math.floor((window.innerWidth * 0.75) / 25);
 
+var new_start_row;
+var new_start_col;
+var new_finish_row;
+var new_finish_col;
+
 // ADD ALGORITHM NAMES HERE
 const algorithms = ['A*', 'Dijkstra'];
 
@@ -18,12 +23,20 @@ export default class PathfindingVisualizer extends Component {
     this.state = {
       grid: [],
       mouseIsPressed: false,
+      sIsPressed: false,
+      fIsPressed: false,
     };
   }
 
   componentDidMount() {
     const grid = getInitialGrid();
     this.setState({grid});
+    document.addEventListener('keydown', this.handleKeyDown.bind(this));
+    document.addEventListener('keyup', this.handleKeyUp.bind(this));
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.onKeyPressed.bind(this));
+    document.removeEventListener('keyup', this.onKeyPressed.bind(this));
   }
 
   resetGrid() {
@@ -54,6 +67,14 @@ export default class PathfindingVisualizer extends Component {
     this.setState({grid});
   }
 
+  generateMaze(grid) {
+    // Find start and end node
+    const [startNode, finishNode] = grid
+      .reduce((a, b) => a.concat(b))
+      .filter(node => node.isStart || node.isFinish);
+    console.log(startNode, finishNode);
+  }
+
   handleMouseDown(row, col) {
     const newGrid = getNewGridWithWallToggled(this.state.grid, row, col);
     this.setState({grid: newGrid, mouseIsPressed: true});
@@ -67,6 +88,50 @@ export default class PathfindingVisualizer extends Component {
 
   handleMouseUp() {
     this.setState({mouseIsPressed: false});
+  }
+
+  handleMouseClick(row, col) {
+    console.log('clicked');
+    if (this.state.sIsPressed) {
+      new_start_row = row;
+      new_start_col = col;
+      const newGrid = getInitialGrid();
+      this.setState({grid: newGrid});
+    } else if (this.state.fIsPressed) {
+      new_finish_row = row;
+      new_finish_col = col;
+      const newGrid = getInitialGrid();
+      this.setState({grid: newGrid});
+    }
+  }
+
+  handleKeyDown(e) {
+    // console.log(e.keyCode);
+    switch (e.keyCode) {
+      case 83: // s is pressed
+        if (this.state.sIsPressed) return;
+        this.setState({sIsPressed: true});
+        break;
+      case 70: // f is pressed
+        if (this.state.fIsPressed) return;
+        this.setState({fIsPressed: true});
+        break;
+      default:
+        return;
+    }
+  }
+  handleKeyUp(e) {
+    // console.log(e.keyCode);
+    switch (e.keyCode) {
+      case 83: // s was released
+        this.setState({sIsPressed: false});
+        break;
+      case 70: // f was released
+        this.setState({fIsPressed: false});
+        break;
+      default:
+        return;
+    }
   }
 
   animate(visitedNodesInOrder, nodesInShortestPathOrder) {
@@ -108,10 +173,10 @@ export default class PathfindingVisualizer extends Component {
                 key={i}
                 alg={alg}
                 grid={grid}
-                START_NODE_ROW={START_NODE_ROW}
-                START_NODE_COL={START_NODE_COL}
-                FINISH_NODE_ROW={FINISH_NODE_ROW}
-                FINISH_NODE_COL={FINISH_NODE_COL}
+                START_NODE_ROW={new_start_row || START_NODE_ROW}
+                START_NODE_COL={new_start_col || START_NODE_COL}
+                FINISH_NODE_ROW={new_finish_row || FINISH_NODE_ROW}
+                FINISH_NODE_COL={new_finish_col || FINISH_NODE_COL}
                 animate={this.animate}
                 animateShortestPath={this.animateShortestPath}
               />
@@ -126,6 +191,9 @@ export default class PathfindingVisualizer extends Component {
         </button>
         <button className="resetButton" onClick={() => this.resetColors()}>
           Reset Colors
+        </button>
+        <button className="resetButton" onClick={() => this.generateMaze(grid)}>
+          Random Maze
         </button>
         <div className="grid">
           {grid.map((row, rowIdx) => {
@@ -144,6 +212,9 @@ export default class PathfindingVisualizer extends Component {
                       onMouseDown={(row, col) => this.handleMouseDown(row, col)}
                       onMouseEnter={(row, col) =>
                         this.handleMouseEnter(row, col)
+                      }
+                      onMouseClick={(row, col) =>
+                        this.handleMouseClick(row, col)
                       }
                       onMouseUp={() => this.handleMouseUp()}
                       row={row}></Node>
@@ -176,8 +247,12 @@ const createNode = (col, row) => {
   return {
     col,
     row,
-    isStart: row === START_NODE_ROW && col === START_NODE_COL,
-    isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
+    isStart:
+      row === (new_start_row || START_NODE_ROW) &&
+      col === (new_start_col || START_NODE_COL),
+    isFinish:
+      row === (new_finish_row || FINISH_NODE_ROW) &&
+      col === (new_finish_col || FINISH_NODE_COL),
     distance: Infinity,
     isVisited: false,
     isWall: false,
