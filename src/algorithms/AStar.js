@@ -7,14 +7,13 @@ export function astar(grid, startNode, finishNode) {
   while (open) {
     sortOpenList(open);
     const cur = open.shift();
+    if (cur === undefined) return visitedNodesInOrder;
     if (cur.isWall) continue;
     if (cur === finishNode) return visitedNodesInOrder;
-    console.log(cur);
     cur.isVisited = true;
     if (cur !== startNode) visitedNodesInOrder.push(cur);
     updateUnvisitedNeighbors(cur, grid, open, visitedNodesInOrder, finishNode);
   }
-  console.log('failure');
   return visitedNodesInOrder;
 }
 
@@ -35,7 +34,6 @@ function updateUnvisitedNeighbors(
   const unvisitedNeighbors = getUnvisitedNeighbors(node, grid);
   for (const neighbor of unvisitedNeighbors) {
     const tentativeScore = node.distance + 1;
-    console.log(!visitedNodesInOrder.includes(neighbor));
     if (tentativeScore < neighbor.distance) {
       neighbor.distance = tentativeScore;
       neighbor.h =
