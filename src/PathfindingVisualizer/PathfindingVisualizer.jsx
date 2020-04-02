@@ -74,7 +74,6 @@ export default class PathfindingVisualizer extends Component {
 
   generateRandomMaze() {
     const newGrid = RandomMaze(this.state.grid);
-    console.log(newGrid);
     this.setState({grid: newGrid});
   }
 
@@ -94,7 +93,6 @@ export default class PathfindingVisualizer extends Component {
   }
 
   handleMouseClick(row, col) {
-    console.log('clicked');
     if (this.state.sIsPressed) {
       new_start_row = row;
       new_start_col = col;
@@ -109,7 +107,6 @@ export default class PathfindingVisualizer extends Component {
   }
 
   handleKeyDown(e) {
-    // console.log(e.keyCode);
     switch (e.keyCode) {
       case 83: // s is pressed
         if (this.state.sIsPressed) return;
@@ -124,7 +121,6 @@ export default class PathfindingVisualizer extends Component {
     }
   }
   handleKeyUp(e) {
-    // console.log(e.keyCode);
     switch (e.keyCode) {
       case 83: // s was released
         this.setState({sIsPressed: false});
@@ -166,10 +162,8 @@ export default class PathfindingVisualizer extends Component {
           .classList.replace('node-visited', 'node-shortest-path');
       }, 30 * i);
     }
-    console.log(nodesInShortestPathOrder.length);
     if (nodesInShortestPathOrder.length === 1) {
       // No path if this is reached
-      console.log('NO PATH');
       for (let i = 0; i < visitedNodesInOrder.length; i++) {
         setTimeout(() => {
           const node = visitedNodesInOrder[i];

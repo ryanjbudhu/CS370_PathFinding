@@ -34,7 +34,6 @@ const getRandomPath = (options, startNode, finishNode) => {
 };
 
 const pickRandomNeighbor = (options, node) => {
-  console.log(node, node.col, node.row);
   const neighbors = [];
   const {col, row} = node;
   if (row > 0) neighbors.push(options[row - 1][col]);
@@ -42,6 +41,5 @@ const pickRandomNeighbor = (options, node) => {
   if (col > 0) neighbors.push(options[row][col - 1]);
   if (col < options[0].length - 1) neighbors.push(options[row][col + 1]);
   const neighborNum = Math.floor(Math.random() * (neighbors.length - 1));
-  console.log(neighbors, neighborNum);
   return neighbors[neighborNum];
 };
