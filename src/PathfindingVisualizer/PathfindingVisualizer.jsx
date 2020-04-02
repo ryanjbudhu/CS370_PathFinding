@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Node from './Node/Node';
 import PathButton from '../algorithms/PathButton';
+import RandomMaze from '../algorithms/RandomMaze';
 
 import './PathfindingVisualizer.css';
 
@@ -57,6 +58,10 @@ export default class PathfindingVisualizer extends Component {
     while (pathNodes.length > 0) {
       pathNodes[0].classList.remove('node-shortest-path');
     }
+    const failedNodes = document.getElementsByClassName('node-failed');
+    while (failedNodes.length > 0) {
+      failedNodes[0].classList.remove('node-failed');
+    }
     const {grid} = this.state;
     for (const row of grid) {
       for (const node of row) {
@@ -67,12 +72,10 @@ export default class PathfindingVisualizer extends Component {
     this.setState({grid});
   }
 
-  generateMaze(grid) {
-    // Find start and end node
-    const [startNode, finishNode] = grid
-      .reduce((a, b) => a.concat(b))
-      .filter(node => node.isStart || node.isFinish);
-    console.log(startNode, finishNode);
+  generateRandomMaze() {
+    const newGrid = RandomMaze(this.state.grid);
+    console.log(newGrid);
+    this.setState({grid: newGrid});
   }
 
   handleMouseDown(row, col) {
@@ -138,7 +141,10 @@ export default class PathfindingVisualizer extends Component {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
-          this.animateShortestPath(nodesInShortestPathOrder);
+          this.animateShortestPath(
+            nodesInShortestPathOrder,
+            visitedNodesInOrder,
+          );
         }, 22 * i);
         return;
       }
@@ -151,7 +157,7 @@ export default class PathfindingVisualizer extends Component {
     }
   }
 
-  animateShortestPath(nodesInShortestPathOrder) {
+  animateShortestPath(nodesInShortestPathOrder, visitedNodesInOrder) {
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
       setTimeout(() => {
         const node = nodesInShortestPathOrder[i];
@@ -159,6 +165,19 @@ export default class PathfindingVisualizer extends Component {
           .getElementById(`node-${node.row}-${node.col}`)
           .classList.replace('node-visited', 'node-shortest-path');
       }, 30 * i);
+    }
+    console.log(nodesInShortestPathOrder.length);
+    if (nodesInShortestPathOrder.length === 1) {
+      // No path if this is reached
+      console.log('NO PATH');
+      for (let i = 0; i < visitedNodesInOrder.length; i++) {
+        setTimeout(() => {
+          const node = visitedNodesInOrder[i];
+          document
+            .getElementById(`node-${node.row}-${node.col}`)
+            .classList.replace('node-visited', 'node-failed');
+        }, 30 * i);
+      }
     }
   }
 
@@ -192,7 +211,9 @@ export default class PathfindingVisualizer extends Component {
         <button className="resetButton" onClick={() => this.resetColors()}>
           Reset Colors
         </button>
-        <button className="resetButton" onClick={() => this.generateMaze(grid)}>
+        <button
+          className="resetButton"
+          onClick={() => this.generateRandomMaze()}>
           Random Maze
         </button>
         <p className="showInstructions">Instructions </p>
