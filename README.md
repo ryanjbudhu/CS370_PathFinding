@@ -1,6 +1,6 @@
 This project was created to show the different path finding algorithms that we learned in our CS370 Class.
 
-You can play with the online version (Here)[https://ryanjbudhu.github.io/CS370_PathFinding/]
+You can play with the online version [Here](https://ryanjbudhu.github.io/CS370_PathFinding/)
 
 Based off of this repo: [Pathfinding-Visualizer-Tutorial](https://github.com/clementmihailescu/Pathfinding-Visualizer-Tutorial).
 
