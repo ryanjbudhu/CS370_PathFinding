@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Path Finding",
+  "name": "CS 370 Path Finding Project",
+  "authors": ["Ryan Budhu", "Chris Simone"],
   "icons": [
     {
       "src": "favicon.ico",
