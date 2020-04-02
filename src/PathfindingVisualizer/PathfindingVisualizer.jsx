@@ -195,6 +195,16 @@ export default class PathfindingVisualizer extends Component {
         <button className="resetButton" onClick={() => this.generateMaze(grid)}>
           Random Maze
         </button>
+        <p className="showInstructions">Instructions </p>
+        <div className="instructions">
+          <p className="">
+            Hold <strong>S</strong> and click to move start
+          </p>
+          <p className="">
+            Hold <strong>F</strong> and click to move finish
+          </p>
+          <p className="">Click and drag to create walls</p>
+        </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (

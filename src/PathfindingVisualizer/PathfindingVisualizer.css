@@ -5,3 +5,28 @@
 .buttonList {
   display: inline-flex;
 }
+
+.showInstructions:hover + .instructions {
+  visibility: visible;
+  transition: display 1s linear;
+  -moz-transition: display 1s linear;
+  -o-transition: display 1s linear;
+  -webkit-transition: display 1s linear;
+}
+
+.instructions {
+  background-color: aliceblue;
+  padding: 5px;
+  border: 2px solid skyblue;
+  visibility: hidden;
+  display: inline;
+  position: absolute;
+  transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  font-size: x-small;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+}
