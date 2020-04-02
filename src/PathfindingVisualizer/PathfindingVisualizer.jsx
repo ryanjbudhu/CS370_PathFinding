@@ -45,6 +45,12 @@ export default class PathfindingVisualizer extends Component {
       pathNodes[0].classList.remove('node-shortest-path');
     }
     const {grid} = this.state;
+    for (const row of grid) {
+      for (const node of row) {
+        node.isVisited = false;
+        node.distance = Infinity;
+      }
+    }
     this.setState({grid});
   }
 
@@ -116,7 +122,7 @@ export default class PathfindingVisualizer extends Component {
         )}
         <br />
         <button className="resetButton" onClick={() => this.resetGrid()}>
-          Reset Grid
+          Reset Walls
         </button>
         <button className="resetButton" onClick={() => this.resetColors()}>
           Reset Colors
