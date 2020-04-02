@@ -15,8 +15,8 @@ export function dijkstra(grid, startNode, finishNode) {
     // we must be trapped and should therefore stop.
     if (closestNode.distance === Infinity) return visitedNodesInOrder;
     closestNode.isVisited = true;
-    visitedNodesInOrder.push(closestNode);
     if (closestNode === finishNode) return visitedNodesInOrder;
+    if (closestNode !== startNode) visitedNodesInOrder.push(closestNode);
     updateUnvisitedNeighbors(closestNode, grid);
   }
 }
