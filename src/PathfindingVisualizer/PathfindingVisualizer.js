@@ -77,9 +77,8 @@ export default class PathfindingVisualizer extends Component {
   }
 
   generateRandomMaze() {
-    const newGrid = RandomMaze(this.state.grid);
+    const newGrid = RandomMaze(getInitialGrid());
     this.setState({grid: newGrid});
-    this.resetColors();
   }
 
   handleMouseDown(row, col) {
