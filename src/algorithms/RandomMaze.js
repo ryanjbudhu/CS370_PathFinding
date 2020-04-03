@@ -14,7 +14,7 @@ const addRandomWalls = (grid, path, startNode, finishNode) => {
       if (path.includes(node) || node === startNode || node === finishNode)
         continue;
       const addWall = Math.floor(Math.random() * 10);
-      if (addWall < 4) {
+      if (addWall < 5) {
         node.isWall = true;
       }
     }
@@ -23,14 +23,23 @@ const addRandomWalls = (grid, path, startNode, finishNode) => {
 };
 
 const getRandomPath = (options, startNode, finishNode) => {
-  const path = [];
-  while (path[path.length - 1] !== finishNode) {
-    const cur = pickRandomNeighbor(options, startNode);
-    path.push(cur);
-    options = options.filter(node => node !== cur);
-    break;
+  const pathFirst = [];
+  const pathLast = [];
+  let randomNum = Math.floor(
+    Math.random() * (options.reduce((a, b) => a.concat(b)).length / 2) + 10,
+  );
+  let first = pickRandomNeighbor(options, startNode);
+  let last = pickRandomNeighbor(options, finishNode);
+  pathFirst.push(first);
+  pathLast.push(last);
+  for (randomNum; randomNum > 0; --randomNum) {
+    const f = pickRandomNeighbor(options, pathFirst[pathFirst.length - 1]);
+    const l = pickRandomNeighbor(options, pathLast[pathLast.length - 1]);
+    pathFirst.push(f);
+    pathLast.push(l);
+    options = options.filter(node => node !== f && node !== l);
   }
-  return path;
+  return pathFirst.concat(pathLast);
 };
 
 const pickRandomNeighbor = (options, node) => {
