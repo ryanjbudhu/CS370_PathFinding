@@ -32,7 +32,7 @@ const getRandomPath = (options, startNode, finishNode) => {
   let last = pickRandomNeighbor(options, finishNode);
   pathFirst.push(first);
   pathLast.push(last);
-  for (randomNum; randomNum > 0; --randomNum) {
+  for (randomNum; randomNum >= 0; --randomNum) {
     const f = pickRandomNeighbor(options, pathFirst[pathFirst.length - 1]);
     const l = pickRandomNeighbor(options, pathLast[pathLast.length - 1]);
     pathFirst.push(f);
