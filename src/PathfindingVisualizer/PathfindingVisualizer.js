@@ -86,7 +86,7 @@ export default class PathfindingVisualizer extends Component {
   generateRecursiveDivisionMaze() {
     new_start_row = 0;
     new_start_col = 0;
-    const [newGrid, fX, fY] = NewRecursiveDivsion(
+    const [grid, fX, fY] = NewRecursiveDivsion(
       getInitialGrid(),
       new_start_row || START_NODE_ROW,
       new_start_col || START_NODE_COL,
@@ -95,10 +95,10 @@ export default class PathfindingVisualizer extends Component {
     );
     new_finish_row = fX;
     new_finish_col = fY;
-    newGrid[0][0].isStart = true;
+    grid[0][0].isStart = true;
     this.resetColors();
-    this.setState({grid: newGrid});
-    console.log(this.state.grid[new_finish_row][new_finish_col]);
+    this.setState({grid});
+    console.log(this.state.grid[0][0], grid[0][0]);
   }
 
   handleMouseDown(row, col) {
@@ -201,6 +201,7 @@ export default class PathfindingVisualizer extends Component {
 
   render() {
     const {grid, mouseIsPressed} = this.state;
+    console.log(new_start_row, new_start_col);
     return (
       <>
         {grid ? (

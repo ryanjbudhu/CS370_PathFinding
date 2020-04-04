@@ -11,10 +11,13 @@ export default class DijkstraButton extends Component {
   // ADD ALGORITHM NAME IN SWITCH
   visualize() {
     const grid = this.props.grid;
-    const startNode =
-      grid[this.props.START_NODE_ROW][this.props.START_NODE_COL];
-    const finishNode =
-      grid[this.props.FINISH_NODE_ROW][this.props.FINISH_NODE_COL];
+    const startNode = grid
+      .reduce((a, b) => a.concat(b))
+      .filter(node => node.isStart)[0];
+    const finishNode = grid
+      .reduce((a, b) => a.concat(b))
+      .filter(node => node.isFinish)[0];
+    console.log(startNode, finishNode);
     let visitedNodesInOrder;
     let nodesInShortestPathOrder;
     switch (this.props.alg) {
