@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Node from './Node/Node';
 import PathButton from '../algorithms/PathButton';
 import RandomMaze from '../algorithms/RandomMaze';
+import RecursiveDivsion from '../algorithms/RecursiveDivision';
 
 import './PathfindingVisualizer.css';
 
@@ -78,6 +79,23 @@ export default class PathfindingVisualizer extends Component {
 
   generateRandomMaze() {
     const newGrid = RandomMaze(getInitialGrid());
+    this.resetColors();
+    this.setState({grid: newGrid});
+  }
+
+  generateRecursiveDivisionMaze() {
+    const [newGrid, sX, sY, fX, fY] = RecursiveDivsion(
+      getInitialGrid(),
+      new_start_row || START_NODE_ROW,
+      new_start_col || START_NODE_COL,
+      new_finish_row || FINISH_NODE_ROW,
+      new_finish_col || FINISH_NODE_COL,
+    );
+    new_start_row = sX;
+    new_start_col = sY;
+    new_finish_row = fX;
+    new_finish_col = fY;
+    this.resetColors();
     this.setState({grid: newGrid});
   }
 
@@ -213,6 +231,11 @@ export default class PathfindingVisualizer extends Component {
           className="resetButton"
           onClick={() => this.generateRandomMaze()}>
           Random Maze
+        </button>
+        <button
+          className="resetButton"
+          onClick={() => this.generateRecursiveDivisionMaze()}>
+          Recursive Division Maze
         </button>
         <p className="showInstructions">Instructions </p>
         <div className="instructions">
