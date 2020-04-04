@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Node from './Node/Node';
 import PathButton from '../algorithms/PathButton';
 import RandomMaze from '../algorithms/MazeMakers/RandomMaze';
-import RecursiveDivsion from '../algorithms/MazeMakers/RecursiveDivision';
+import NewRecursiveDivsion from '../algorithms/MazeMakers/NewRecursiveDivision';
 
 import './PathfindingVisualizer.css';
 
@@ -84,19 +84,21 @@ export default class PathfindingVisualizer extends Component {
   }
 
   generateRecursiveDivisionMaze() {
-    const [newGrid, sX, sY, fX, fY] = RecursiveDivsion(
+    new_start_row = 0;
+    new_start_col = 0;
+    const [newGrid, fX, fY] = NewRecursiveDivsion(
       getInitialGrid(),
       new_start_row || START_NODE_ROW,
       new_start_col || START_NODE_COL,
       new_finish_row || FINISH_NODE_ROW,
       new_finish_col || FINISH_NODE_COL,
     );
-    new_start_row = sX;
-    new_start_col = sY;
     new_finish_row = fX;
     new_finish_col = fY;
+    newGrid[0][0].isStart = true;
     this.resetColors();
     this.setState({grid: newGrid});
+    console.log(this.state.grid[new_finish_row][new_finish_col]);
   }
 
   handleMouseDown(row, col) {
