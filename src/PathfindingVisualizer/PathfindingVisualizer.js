@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import Node from './Node/Node';
 import PathButton from '../algorithms/PathButton';
-import RandomMaze from '../algorithms/RandomMaze';
-import RecursiveDivsion from '../algorithms/RecursiveDivision';
+import RandomMaze from '../algorithms/MazeMakers/RandomMaze';
+import RecursiveDivsion from '../algorithms/MazeMakers/RecursiveDivision';
 
 import './PathfindingVisualizer.css';
 
