@@ -55,7 +55,6 @@ export default class PathfindingVisualizer extends Component {
     const visitedNodes = document.getElementsByClassName('node');
     for (let i = 0; i < visitedNodes.length; ++i) {
       if (visitedNodes[i].classList.contains('node-wall')) continue;
-      // console.log(visitedNodes[i].classList);
       visitedNodes[i].className = 'node';
     }
     const {grid} = this.state;
@@ -98,7 +97,6 @@ export default class PathfindingVisualizer extends Component {
     grid[0][0].isStart = true;
     this.resetColors();
     this.setState({grid});
-    console.log(this.state.grid[0][0], grid[0][0]);
   }
 
   handleMouseDown(row, col) {
@@ -201,7 +199,6 @@ export default class PathfindingVisualizer extends Component {
 
   render() {
     const {grid, mouseIsPressed} = this.state;
-    console.log(new_start_row, new_start_col);
     return (
       <>
         {grid ? (
