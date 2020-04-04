@@ -17,7 +17,6 @@ export default class DijkstraButton extends Component {
     const finishNode = grid
       .reduce((a, b) => a.concat(b))
       .filter(node => node.isFinish)[0];
-    console.log(startNode, finishNode);
     let visitedNodesInOrder;
     let nodesInShortestPathOrder;
     switch (this.props.alg) {
