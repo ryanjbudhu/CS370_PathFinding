@@ -17,7 +17,7 @@ export default function NewRecursiveDivision(
 }
 
 function divide(grid, region) {
-  if (region.length < 22) return;
+  if (region.length < 100) return;
   let seeds = [];
   const randA = Math.floor(Math.random() * (region.length - 1));
   let subregion_A = [region[randA]];
