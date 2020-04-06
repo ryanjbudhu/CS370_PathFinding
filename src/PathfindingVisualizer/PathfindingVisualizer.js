@@ -7,9 +7,9 @@ import EllersMaze from '../algorithms/MazeMakers/EllersMaze';
 
 import './PathfindingVisualizer.css';
 
-const START_NODE_ROW = Math.floor((window.innerHeight * 0.35) / 30);
+const START_NODE_ROW = Math.floor((window.innerHeight * 0.35) / 31);
 const START_NODE_COL = Math.floor((window.innerWidth * 0.25) / 25);
-const FINISH_NODE_ROW = Math.floor((window.innerHeight * 0.35) / 30);
+const FINISH_NODE_ROW = Math.floor((window.innerHeight * 0.35) / 31);
 const FINISH_NODE_COL = Math.floor((window.innerWidth * 0.75) / 25);
 
 var new_start_row;
@@ -43,9 +43,9 @@ export default class PathfindingVisualizer extends Component {
   }
 
   resetGrid() {
-    new_start_row = Math.floor((window.innerHeight * 0.35) / 30);
+    new_start_row = Math.floor((window.innerHeight * 0.35) / 31);
     new_start_col = Math.floor((window.innerWidth * 0.25) / 25);
-    new_finish_row = Math.floor((window.innerHeight * 0.35) / 30);
+    new_finish_row = Math.floor((window.innerHeight * 0.35) / 31);
     new_finish_col = Math.floor((window.innerWidth * 0.75) / 25);
     const grid = getInitialGrid();
     this.resetColors();
@@ -301,7 +301,7 @@ export default class PathfindingVisualizer extends Component {
 
 const getInitialGrid = () => {
   const numWide = Math.floor(window.innerWidth / 25);
-  const numHigh = Math.floor(window.innerHeight / 30);
+  const numHigh = Math.floor(window.innerHeight / 31);
   const grid = [];
   for (let row = 0; row < numHigh; row++) {
     const currentRow = [];
