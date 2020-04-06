@@ -26,10 +26,10 @@ export default function EllersMaze(
 
 
     for (var row = 1; row < grid.length; ++row){
+        randomMergeCells(cellsInSet, setWithCells, grid[row]);
         for (var col = 0; col < grid[row].length; ++col){
-            if (Math.floor(Math.random()*20) < 5){
+            if (setWithCells[col].length >= 2){
                 grid[row][col].isWall = true;
-                continue;
             }
         }
     }
@@ -37,8 +37,10 @@ export default function EllersMaze(
     return [grid, grid.length - 1, grid[0].length - 1];
 }
 
-function randomPass(grid, rowIdx, set) {
-    
+function randomPass(cellsInSet, setWithCells, row) {
+    const randomList = getRandArray(row.length);
+    for (var i = 0; i < randomList.length; ++i){
+    }
 }
 
 function randomMergeCells(cellsInSet, setWithCells, row){
