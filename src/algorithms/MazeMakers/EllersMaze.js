@@ -24,7 +24,6 @@ export default function EllersMaze(
         }
     }
 
-    console.log(cellsInSet, setWithCells);
 
     for (var row = 1; row < grid.length; ++row){
         for (var col = 0; col < grid[row].length; ++col){
