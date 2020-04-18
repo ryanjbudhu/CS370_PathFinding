@@ -3,6 +3,7 @@ import Node from './Node/Node';
 import PathButton from '../algorithms/PathButton';
 import RandomMaze from '../algorithms/MazeMakers/RandomMaze';
 import NewRecursiveDivsion from '../algorithms/MazeMakers/NewRecursiveDivision';
+import RealEllersMaze from '../algorithms/MazeMakers/RealEllersMaze';
 import EllersMaze from '../algorithms/MazeMakers/EllersMaze';
 
 import './PathfindingVisualizer.css';
@@ -77,14 +78,18 @@ export default class PathfindingVisualizer extends Component {
     this.setState({grid});
   }
 
-  generateMaze(mazeType){
+  generateMaze(mazeType) {
     let grid;
-    if(mazeType === "recusive" || mazeType === "ellers") {
-        new_start_row = 0;
-        new_start_col = 0;
-        let fX;
-        let fY;
-        if (mazeType === "recursive"){
+    if (
+      mazeType === 'recusive' ||
+      mazeType === 'ellers' ||
+      mazeType === 'realellers'
+    ) {
+      new_start_row = 0;
+      new_start_col = 0;
+      let fX;
+      let fY;
+      if (mazeType === 'recursive') {
         [grid, fX, fY] = NewRecursiveDivsion(
           getInitialGrid(),
           new_start_row || START_NODE_ROW,
@@ -92,20 +97,28 @@ export default class PathfindingVisualizer extends Component {
           new_finish_row || FINISH_NODE_ROW,
           new_finish_col || FINISH_NODE_COL,
         );
-        } else {
-          [grid, fX, fY] = EllersMaze(
-            getInitialGrid(),
-            new_start_row || START_NODE_ROW,
-            new_start_col || START_NODE_COL,
-            new_finish_row || FINISH_NODE_ROW,
-            new_finish_col || FINISH_NODE_COL,
-          );
-        }
-        new_finish_row = fX;
-        new_finish_col = fY;
-        grid[0][0].isStart = true;
+      } else if (mazeType === 'realellers') {
+        [grid, fX, fY] = RealEllersMaze(
+          getInitialGrid(),
+          new_start_row || START_NODE_ROW,
+          new_start_col || START_NODE_COL,
+          new_finish_row || FINISH_NODE_ROW,
+          new_finish_col || FINISH_NODE_COL,
+        );
+      } else {
+        [grid, fX, fY] = EllersMaze(
+          getInitialGrid(),
+          new_start_row || START_NODE_ROW,
+          new_start_col || START_NODE_COL,
+          new_finish_row || FINISH_NODE_ROW,
+          new_finish_col || FINISH_NODE_COL,
+        );
+      }
+      new_finish_row = fX;
+      new_finish_col = fY;
+      grid[0][0].isStart = true;
     } else {
-        grid = RandomMaze(getInitialGrid());
+      grid = RandomMaze(getInitialGrid());
     }
 
     this.resetColors();
@@ -240,20 +253,23 @@ export default class PathfindingVisualizer extends Component {
         <button className="resetButton" onClick={() => this.resetColors()}>
           Reset Colors
         </button>
-        <button
-          className="resetButton"
-          onClick={() => this.generateMaze()}>
+        <button className="resetButton" onClick={() => this.generateMaze()}>
           Random Maze
         </button>
         <button
           className="resetButton"
-          onClick={() => this.generateMaze("recursive")}>
+          onClick={() => this.generateMaze('recursive')}>
           Recursive Division Maze
         </button>
         <button
           className="resetButton"
-          onClick={() => this.generateMaze("ellers")}>
+          onClick={() => this.generateMaze('ellers')}>
           Eller's Maze
+        </button>
+        <button
+          className="resetButton"
+          onClick={() => this.generateMaze('realellers')}>
+          Alt Eller's Maze
         </button>
         <p className="showInstructions">Instructions </p>
         <div className="instructions">
